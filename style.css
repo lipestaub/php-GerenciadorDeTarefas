@@ -32,6 +32,20 @@ main .form {
     margin: 4px 0;
 }
 
+main .form .message {
+    background: rgba(243, 243, 16, 0.89);
+    margin: 10px 0 0;
+    padding: 4px;
+    border-radius: 4px;
+
+    display: flex;
+    justify-content: center;
+}
+
+main .form .message span {
+    font-size: 12px;
+}
+
 main form {
     display: flex;
     justify-content: center;
@@ -89,7 +103,7 @@ main .task-list ul {
     list-style: none;
 }
 
-main .task-list ul li {
+main .task-list ul li span{
     background: #AB47BC;
     color: #FFF;
 
@@ -108,7 +122,7 @@ main .task-list ul li {
     transition: background 0.3s;
 }
 
-main .task-list ul li:hover {
+main .task-list ul li span:hover {
     background: #AA47BCE5;
 }
 

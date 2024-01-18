@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\type;
+
     session_start();
 
     if (!isset($_SESSION['tasks'])) {
@@ -6,12 +9,22 @@
     }
 
     if (isset($_GET['task_name'])) {
-        array_push($_SESSION['tasks'], $_GET['task_name']);
-        unset($_GET['task_name']);
+        if ($_GET['task_name'] != "") {
+            array_push($_SESSION['tasks'], $_GET['task_name']);
+            unset($_GET['task_name']);
+        }
+        else {
+            $_SESSION['message'] = "O campo 'Nome da tarefa' deve ser preeenchido!";
+        }
     }
 
     if (isset($_GET['clear'])) {
         unset($_SESSION['tasks']);
+    }
+
+    if (isset($_GET['task_key'])) {
+        unset($_SESSION['tasks'][$_GET['task_key']]);
+        unset($_GET['task_key']);
     }
 ?>
 
@@ -36,6 +49,17 @@
     
         <main>
             <div class="form">
+                <?php
+                    if (isset($_SESSION['message'])) {
+                ?>
+                        <div class="message">
+                            <span><?php echo $_SESSION['message']; ?></span>
+                        </div>
+                <?php
+                        unset($_SESSION['message']);
+                    }
+                ?>
+
                 <form action="" method="get">
                     <label for="task_name">Tarefa:</label>
                     <br>
@@ -47,7 +71,7 @@
     
             
             <?php
-                if (isset($_SESSION['tasks'])) {
+                if ($_SESSION['tasks'] != []) {
             ?>
                     <div class="separator"></div>
 
@@ -55,7 +79,11 @@
                         <?php
                             echo "<ul>";
                                 foreach ($_SESSION['tasks'] as $key=>$task) {
-                                    echo "<li>$task</li>";
+                                    echo "<li>
+                                    <span>$task<span>
+                                    <button class='btn-remove' onclick='removeTask($key)'>Remover</button>
+                                    
+                                    </li>";
                                 }
                             echo "</ul>";
                         ?>
@@ -73,5 +101,13 @@
             <p>Desenvolvido por <a href="https://github.com/lipestaub" target="_blank">@lipestaub</a></p>
         </footer>
     </div>
+
+    <script>
+        function removeTask(key) {
+            if (confirm('Você realmente deseja remover esta tarefa?')) {
+                window.location = 'http://localhost/Projetos/php-GerenciadorDeTarefas/?task_key=' + key;
+            }
+        }
+    </script>
 </body>
 </html>
