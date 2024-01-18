@@ -14,9 +14,11 @@ body {
 .container {
     background: #FFF;
 
-    margin: 5% auto 0;
+    margin: 5% auto 5%;
     max-width: 450px;
     padding: 12px;
+
+    border-radius: 6px;
 }
 
 
@@ -78,7 +80,6 @@ main .form form button {
     height: 32px;
     border: none;
     border-radius: 4px;
-    
 
     margin: 4px 0;
 
@@ -103,27 +104,47 @@ main .task-list ul {
     list-style: none;
 }
 
-main .task-list ul li span{
+main .task-list ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    margin: 4px 0;
+}
+
+main .task-list ul li .task_title{
     background: #AB47BC;
     color: #FFF;
 
-    height: 42px;
+    height: 32px;
     border: none;
     border-radius: 4px;
+
+    width: 400px;
     
-
-    padding: 12px;
-    margin: 4px 0;
-
-    display: flex;
-    justify-content: left;
-    align-items: center;
+    padding: 6px;
 
     transition: background 0.3s;
 }
 
-main .task-list ul li span:hover {
+main .task-list ul li .task_title:hover {
     background: #AA47BCE5;
+}
+
+main .task-list ul li button{
+    background: #C73116EA;
+    color: #FFF;
+
+    height: 32px;
+    border: none;
+    border-radius: 4px;    
+    padding: 6px;
+
+    transition: background 0.3s;
+}
+
+main .task-list ul li button:hover {
+    background: #C73116D0;
 }
 
 main .task-list .btn-clear {
@@ -140,14 +161,20 @@ main .task-list .btn-clear {
 }
 
 main .task-list .btn-clear:hover {
-    background: #c73116d0;
+    background: #C73116D0;
 }
 
 footer {
     background: #F0F0F5;
 
     border-radius: 4px;
-    padding: 12px;
+    padding: 7px;
+
+    height: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 footer p {

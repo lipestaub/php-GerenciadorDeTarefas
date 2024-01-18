@@ -1,7 +1,4 @@
 <?php
-
-use function PHPSTORM_META\type;
-
     session_start();
 
     if (!isset($_SESSION['tasks'])) {
@@ -19,7 +16,7 @@ use function PHPSTORM_META\type;
     }
 
     if (isset($_GET['clear'])) {
-        unset($_SESSION['tasks']);
+        $_SESSION['tasks'] = [];
     }
 
     if (isset($_GET['task_key'])) {
@@ -62,9 +59,7 @@ use function PHPSTORM_META\type;
 
                 <form action="" method="get">
                     <label for="task_name">Tarefa:</label>
-                    <br>
                     <input type="text" name="task_name" id="task_name" placeholder="Nome da tarefa">
-                    <br>
                     <button type="submit">Cadastrar</button>
                 </form>
             </div>
@@ -79,10 +74,10 @@ use function PHPSTORM_META\type;
                         <?php
                             echo "<ul>";
                                 foreach ($_SESSION['tasks'] as $key=>$task) {
-                                    echo "<li>
-                                    <span>$task<span>
-                                    <button class='btn-remove' onclick='removeTask($key)'>Remover</button>
-                                    
+                                    echo "
+                                    <li>
+                                        <div class='task_title'><span>$task<span></div>
+                                        <button class='btn-remove' onclick='removeTask($key)'>Remover</button>
                                     </li>";
                                 }
                             echo "</ul>";
@@ -105,7 +100,7 @@ use function PHPSTORM_META\type;
     <script>
         function removeTask(key) {
             if (confirm('Você realmente deseja remover esta tarefa?')) {
-                window.location = 'http://localhost/Projetos/php-GerenciadorDeTarefas/?task_key=' + key;
+                window.location = 'http://localhost/php-GerenciadorDeTarefas/?task_key=' + key;
             }
         }
     </script>
