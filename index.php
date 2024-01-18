@@ -1,28 +1,5 @@
 <?php
     session_start();
-
-    if (!isset($_SESSION['tasks'])) {
-        $_SESSION['tasks'] = [];
-    }
-
-    if (isset($_GET['task_name'])) {
-        if ($_GET['task_name'] != "") {
-            array_push($_SESSION['tasks'], $_GET['task_name']);
-            unset($_GET['task_name']);
-        }
-        else {
-            $_SESSION['message'] = "O campo 'Nome da tarefa' deve ser preeenchido!";
-        }
-    }
-
-    if (isset($_GET['clear'])) {
-        $_SESSION['tasks'] = [];
-    }
-
-    if (isset($_GET['task_key'])) {
-        unset($_SESSION['tasks'][$_GET['task_key']]);
-        unset($_GET['task_key']);
-    }
 ?>
 
 <!DOCTYPE html>
@@ -57,9 +34,14 @@
                     }
                 ?>
 
-                <form action="" method="get">
+                <form action="taskController.php" method="post">
+                    <input type="hidden" name="insert" value="insert">
                     <label for="task_name">Tarefa:</label>
                     <input type="text" name="task_name" id="task_name" placeholder="Nome da tarefa">
+                    <label for="task_description">Descrição:</label>
+                    <input type="text" name="task_description" id="task_description" placeholder="Descrição da tarefa">
+                    <label for="task_date">Data:</label>
+                    <input type="date" name="task_date" id="task_date">
                     <button type="submit">Cadastrar</button>
                 </form>
             </div>
@@ -73,16 +55,16 @@
                     <div class="task-list">
                         <?php
                             echo "<ul>";
-                                foreach ($_SESSION['tasks'] as $key=>$task) {
+                                foreach ($_SESSION['tasks'] as $taskKey=>$data) {
                                     echo "
                                     <li>
-                                        <div class='task_title'><span>$task<span></div>
-                                        <button class='btn-remove' onclick='removeTask($key)'>Remover</button>
+                                        <div class='task_title'><span>" . $data['task_name'] . "<span></div>
+                                        <button class='btn-remove' onclick='removeTask($taskKey)'>Remover</button>
                                     </li>";
                                 }
                             echo "</ul>";
                         ?>
-                        <form action="" method="get">
+                        <form action="taskController.php" method="get">
                             <input type="hidden" name="clear">
                             <button class="btn-clear" type="submit">Limpar Tarefas</button>
                         </form>
@@ -100,7 +82,7 @@
     <script>
         function removeTask(key) {
             if (confirm('Você realmente deseja remover esta tarefa?')) {
-                window.location = 'http://localhost/php-GerenciadorDeTarefas/?task_key=' + key;
+                window.location = 'http://localhost/php-GerenciadorDeTarefas/taskController.php?task_key=' + key;
             }
         }
     </script>
