@@ -60,8 +60,8 @@
                                 foreach ($_SESSION['tasks'] as $taskKey=>$data) {
                                     echo "
                                     <li>
-                                        <div class='task_title'><span>" . $data['task_name'] . "<span></div>
-                                        <button class='btn-remove' onclick='removeTask($taskKey)'>Remover</button>
+                                        <div class='task_title'><a href='details.php?task_key=$taskKey'>" . $data['task_name'] . "</a></div>
+                                        <div><button class='btn-remove' onclick='removeTask($taskKey)'>Remover</button></div>
                                     </li>";
                                 }
                             echo "</ul>";

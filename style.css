@@ -69,6 +69,11 @@ main .form form input {
     border-radius: 4px;
 }
 
+main .form form input[type="file"] {
+    border: 0;
+    padding: 0;
+}
+
 main .form form input:focus {
     background: #F0F0F5;
 }
@@ -108,8 +113,28 @@ main .task-list ul li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 5px;
     margin: 4px 0;
+}
+
+main .task-list ul li div {
+    margin: 1px;
+}
+
+main .task-list ul li div a {
+    text-decoration: none;
+    color: #FFF;
+}
+
+main .task-list ul li div a:link {
+    text-decoration: none;
+}
+
+main .task-list ul li div a:visited {
+    text-decoration: none;
+}
+
+main .task-list ul li div a:hover {
+    font-weight: bold;
 }
 
 main .task-list ul li .task_title{
@@ -131,7 +156,7 @@ main .task-list ul li .task_title:hover {
     background: #AA47BCE5;
 }
 
-main .task-list ul li button{
+main .task-list ul li div button{
     background: #C73116EA;
     color: #FFF;
 
@@ -143,7 +168,7 @@ main .task-list ul li button{
     transition: background 0.3s;
 }
 
-main .task-list ul li button:hover {
+main .task-list ul li div button:hover {
     background: #C73116D0;
 }
 
@@ -172,4 +197,51 @@ footer p a {
 
 footer p a:hover {
     font-weight: bold;
+}
+
+.details-container {
+    background: #FFF;
+    max-width: 700px;
+    margin: 5% auto 5% auto;
+
+    padding: 12px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 12px;
+}
+
+.row .details {
+    width: 300px;
+    border: 1px solid #F0F0F5;
+    border-radius: 4px;
+    margin: 0 8px 0 8px;
+    padding: 16px;
+}
+
+.row .details dl dt {
+    margin: 4px 0 4px;
+    font-weight: bold;
+    color: #666;
+}
+
+.row .details dl dd {
+    margin: 4px 0 12px;
+    color: #999;
+}
+
+.row .image {
+    width: 400px;
+    border: 1px solid #F0F0F5;
+    border-radius: 4px;
+    margin: 0 8px 0 8px;
+    padding: 16px;
+}
+
+.row .image img {
+    max-width: 100%;
+    height: auto;
 }
