@@ -147,23 +147,6 @@ main .task-list ul li button:hover {
     background: #C73116D0;
 }
 
-main .task-list .btn-clear {
-    background: #C73116EA;
-    color: #FFF;
-
-    height: 32px;
-    border: none;
-    border-radius: 4px;
-
-    margin: 4px 0;
-
-    transition: background 0.3s;
-}
-
-main .task-list .btn-clear:hover {
-    background: #C73116D0;
-}
-
 footer {
     background: #F0F0F5;
 

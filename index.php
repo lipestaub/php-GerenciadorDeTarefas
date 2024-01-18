@@ -34,7 +34,7 @@
                     }
                 ?>
 
-                <form action="taskController.php" method="post">
+                <form action="taskController.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="insert" value="insert">
                     <label for="task_name">Tarefa:</label>
                     <input type="text" name="task_name" id="task_name" placeholder="Nome da tarefa">
@@ -42,6 +42,8 @@
                     <input type="text" name="task_description" id="task_description" placeholder="Descrição da tarefa">
                     <label for="task_date">Data:</label>
                     <input type="date" name="task_date" id="task_date">
+                    <label for="task_image">Imagem:</label>
+                    <input type="file" name="task_image" id="task_image">
                     <button type="submit">Cadastrar</button>
                 </form>
             </div>
@@ -64,10 +66,6 @@
                                 }
                             echo "</ul>";
                         ?>
-                        <form action="taskController.php" method="get">
-                            <input type="hidden" name="clear">
-                            <button class="btn-clear" type="submit">Limpar Tarefas</button>
-                        </form>
                     </div>
             <?php
                 }
