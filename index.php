@@ -1,5 +1,11 @@
 <?php
+    require_once __DIR__ . '/connect.php';
+
     session_start();
+
+    $stmt = $conn->prepare("SELECT * FROM tasks");
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -50,18 +56,18 @@
     
             
             <?php
-                if ($_SESSION['tasks'] != []) {
+                if (count($stmt->fetchAll()) > 0) {
             ?>
                     <div class="separator"></div>
 
                     <div class="task-list">
                         <?php
                             echo "<ul>";
-                                foreach ($_SESSION['tasks'] as $taskKey=>$data) {
+                                foreach ($stmt->fetchAll() as $task) {
                                     echo "
                                     <li>
-                                        <div class='task_title'><a href='details.php?task_key=$taskKey'>" . $data['task_name'] . "</a></div>
-                                        <div><button class='btn-remove' onclick='removeTask($taskKey)'>Remover</button></div>
+                                        <div class='task_title'><a href='details.php?task_id='" . $task['id'] ."'>" . $task['task_name'] . "</a></div>
+                                        <div><button class='btn-remove' onclick='removeTask(" . $task['id'] . ")'>Remover</button></div>
                                     </li>";
                                 }
                             echo "</ul>";
@@ -78,9 +84,9 @@
     </div>
 
     <script>
-        function removeTask(key) {
+        function removeTask(taskId) {
             if (confirm('Você realmente deseja remover esta tarefa?')) {
-                window.location = 'http://localhost/php-GerenciadorDeTarefas/taskController.php?task_key=' + key;
+                window.location = 'http://localhost/php-GerenciadorDeTarefas/taskController.php?task_id=' + taskId;
             }
         }
     </script>

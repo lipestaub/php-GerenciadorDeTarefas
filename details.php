@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $data = $_SESSION['tasks'][$_GET['task_key']];
+    $data = $_SESSION['tasks'][$_GET['task_id']];
 ?>
 
 <!DOCTYPE html>

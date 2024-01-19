@@ -37,9 +37,9 @@
         header('Location: index.php');
     }
 
-    if (isset($_GET['task_key'])) {
-        unset($_SESSION['tasks'][$_GET['task_key']]);
-        unset($_GET['task_key']);
+    if (isset($_GET['task_id'])) {
+        unset($_SESSION['tasks'][$_GET['task_id']]);
+        unset($_GET['task_id']);
 
         header('Location: index.php');
     }
