@@ -108,7 +108,7 @@ main .form form input:focus {
 }
 
 main .form form button {
-    background: #AB47BC;
+    background: #06C4A4;
     color: #FFF;
 
     height: 32px;
@@ -121,7 +121,7 @@ main .form form button {
 }
 
 main .form form button:hover {
-    background: #AA47BCE5;
+    background: #06C4A4BD;
 }
 
 main .separator {
@@ -167,7 +167,7 @@ main .task-list ul li div a:hover {
 }
 
 main .task-list ul li .task_title{
-    background: #AB47BC;
+    background: #06C4A4;
     color: #FFF;
 
     height: 32px;
@@ -182,7 +182,7 @@ main .task-list ul li .task_title{
 }
 
 main .task-list ul li .task_title:hover {
-    background: #AA47BCE5;
+    background: #06C4A4BD;
 }
 
 main .task-list ul li div button{
