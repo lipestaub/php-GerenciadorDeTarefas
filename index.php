@@ -6,6 +6,8 @@
     $stmt = $conn->prepare("SELECT * FROM tasks");
     $stmt->execute();
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+    $tasks = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +25,24 @@
 </head>
 <body>
     <div class="container">
+        <?php
+            if (isset($_SESSION['success'])) {
+        ?>
+                <div class="alert-success">
+                    <span><?php echo $_SESSION['success']; ?></span>
+                </div>
+        <?php
+                unset($_SESSION['success']);
+            }
+            else if (isset($_SESSION['error'])) {
+        ?>
+                <div class="alert-error">
+                    <span><?php echo $_SESSION['error']; ?></span>
+                </div>
+        <?php
+                unset($_SESSION['error']);
+            }
+        ?>
         <header>
             <h1>Gerenciador de Tarefas</h1>
         </header>
@@ -30,13 +50,13 @@
         <main>
             <div class="form">
                 <?php
-                    if (isset($_SESSION['message'])) {
+                    if (isset($_SESSION['alert-message'])) {
                 ?>
-                        <div class="message">
-                            <span><?php echo $_SESSION['message']; ?></span>
+                        <div class="alert-message">
+                            <span><?php echo $_SESSION['alert-message']; ?></span>
                         </div>
                 <?php
-                        unset($_SESSION['message']);
+                        unset($_SESSION['alert-message']);
                     }
                 ?>
 
@@ -56,17 +76,17 @@
     
             
             <?php
-                if (count($stmt->fetchAll()) > 0) {
+                if (count($tasks) > 0) {
             ?>
                     <div class="separator"></div>
 
                     <div class="task-list">
                         <?php
                             echo "<ul>";
-                                foreach ($stmt->fetchAll() as $task) {
+                                foreach ($tasks as $task) {
                                     echo "
                                     <li>
-                                        <div class='task_title'><a href='details.php?task_id='" . $task['id'] ."'>" . $task['task_name'] . "</a></div>
+                                        <div class='task_title'><a href='details.php?task_id=" . $task['id'] ."'>" . $task['task_name'] . "</a></div>
                                         <div><button class='btn-remove' onclick='removeTask(" . $task['id'] . ")'>Remover</button></div>
                                     </li>";
                                 }

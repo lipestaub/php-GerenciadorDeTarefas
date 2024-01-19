@@ -21,6 +21,35 @@ body {
     border-radius: 6px;
 }
 
+.alert-success {
+    background: rgba(6, 172, 0, 0.959);
+    margin: 10px 0 0;
+    padding: 4px;
+    border-radius: 4px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.alert-success span {
+    color: #FFF;
+    font-size: 12px;
+}
+
+.alert-error {
+    background: #C73116EA;
+    margin: 10px 0 0;
+    padding: 4px;
+    border-radius: 4px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.alert-success span {
+    color: #FFF;
+    font-size: 12px;
+}
 
 header {
     display: flex;
@@ -34,7 +63,7 @@ main .form {
     margin: 4px 0;
 }
 
-main .form .message {
+main .form .alert-message {
     background: rgba(243, 243, 16, 0.89);
     margin: 10px 0 0;
     padding: 4px;
@@ -44,7 +73,7 @@ main .form .message {
     justify-content: center;
 }
 
-main .form .message span {
+main .form .alert-message span {
     font-size: 12px;
 }
 

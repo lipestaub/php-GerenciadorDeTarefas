@@ -1,7 +1,14 @@
 <?php
+    require_once __DIR__ . '/connect.php';
+
     session_start();
 
-    $data = $_SESSION['tasks'][$_GET['task_id']];
+    $stmt = $conn->prepare("SELECT * FROM tasks WHERE id = :id;");
+    $stmt->bindParam('id', $_GET['task_id']);
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+    $task = $stmt->fetchAll()[0];
 ?>
 
 <!DOCTYPE html>
@@ -22,20 +29,20 @@
 <body>
     <div class="details-container">
         <header>
-            <h1><?php echo $data['task_name']; ?></h1>
+            <h1><?php echo $task['task_name']; ?></h1>
         </header>
 
         <main class="row">
             <div class="details">
                 <dl>
                     <dt>Descrição da tarefa:</dt>
-                    <dd><?php echo $data['task_description']; ?></dd>
+                    <dd><?php echo $task['task_description']; ?></dd>
                     <dt>Data da tarefa:</dt>
-                    <dd><?php echo $data['task_date']; ?></dd>
+                    <dd><?php echo $task['task_date']; ?></dd>
                 </dl>
             </div>
             <div class="image">
-                <img src="uploads/<?php echo $data['task_image']; ?>" alt="Imagem da tarefa">
+                <img src="uploads/<?php echo $task['task_image']; ?>" alt="Imagem da tarefa">
             </div>
         </main>
 

@@ -1,9 +1,7 @@
 <?php
-    session_start();
+    require_once __DIR__ . '/connect.php';
 
-    if (!isset($_SESSION['tasks'])) {
-        $_SESSION['tasks'] = [];
-    }
+    session_start();
 
     if (isset($_POST['task_name'])) {
         if ($_POST['task_name'] != "") {
@@ -17,29 +15,36 @@
                 move_uploaded_file($_FILES['task_image']['tmp_name'], $dir.$fileName);
             }
 
-            $data = [
-                'task_name' => $_POST['task_name'],
-                'task_description' => $_POST['task_description'],
-                'task_date' => $_POST['task_date'],
-                'task_image'=> $fileName
-            ];
+            $stmt = $conn->prepare("INSERT INTO tasks(task_name, task_description, task_image, task_date) VALUES(:name, :description, :image, :date);");
+            $stmt->bindParam('name', $_POST['task_name']);
+            $stmt->bindParam('description', $_POST['task_description']);
+            $stmt->bindParam('image', $fileName);
+            $stmt->bindParam('date', $_POST['task_date']);
 
-            array_push($_SESSION['tasks'], $data);
-
-            unset($_POST['task_name']);
-            unset($_POST['task_description']);
-            unset($_POST['task_date']);
+            if ($stmt->execute()) {
+                $_SESSION['success'] = 'Os dados foram cadastrados!';
+            }
+            else {
+                $_SESSION['error'] = 'Erro: Os dados não foram cadastrados!';
+            }
         }
         else {
-            $_SESSION['message'] = "O campo 'Nome da tarefa' deve ser preeenchido!";
+            $_SESSION['alert-message'] = "O campo 'Nome da tarefa' deve ser preeenchido!";
         }
 
         header('Location: index.php');
     }
 
     if (isset($_GET['task_id'])) {
-        unset($_SESSION['tasks'][$_GET['task_id']]);
-        unset($_GET['task_id']);
+        $stmt = $conn->prepare("DELETE FROM tasks WHERE id = :id;");
+        $stmt->bindParam('id', $_GET['task_id']);
+
+        if ($stmt->execute()) {
+            $_SESSION['success'] = 'A tarefa foi excluída!';
+        }
+        else {
+            $_SESSION['error'] = 'Erro: A tarefa não foi excluída!';
+        }
 
         header('Location: index.php');
     }
